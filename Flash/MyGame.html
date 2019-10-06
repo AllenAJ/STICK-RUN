@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>MyGame</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css" media="screen">
+		html, body { height:100%; background-color: #ffffff;}
+		body { margin:0; padding:0; overflow:hidden; }
+		#flashContent { width:100%; height:100%; }
+		</style>
+		<script>
+        const socket = new WebSocket('ws://10.2.88.162:22000/');
+        // Connection opened
+        socket.addEventListener('open', function(event) {
+            console.log('on Open')
+            socket.send('Hello Server!');
+        });
+        // Listen for messages
+        socket.addEventListener('message', function(event) {
+            console.log('onMessage')
+            console.log('Message from server ', event.data);
+        });
+        socket.addEventListener('connection', function(event) {
+            console.log('onNewConnection')
+            console.log('Message from server ', event.data);
+        });
+        //Sending Messages
+        function send(message) {
+            socket.send("CLIENT:" + message)
+        }
+				//Accepting Marketplace trade items
+				function trade_accept(items,itemk,player)
+        {
+            //Console.WriteLine("trader = " + player.myTrader);
+            string[] bitems = items.Split(',');
+           // List<string> bitems = new List<string>(items.Split(','));
+            int howmany = 1;
+            foreach (string item in bitems)
+            {
+                if (item != "")
+                {
+                    console.log();("howmany = " + howmany);
+                    howmany = howmany + 1;
+                }
+                console.log();("howmany = " + howmany);
+          }
+					private void partnerreject(Player player)
+	        {
+	            foreach (Player p in Players)
+	            {
+	                if (player.myTrader == p.ConnectUserId)
+	                {
+	                     p.Send("rejected");
+	                     p.myTrader = "0";
+	                }
+	            }
+	            player.Busy = "0";
+	            player.myTrader = "0";
+	            updateRoomOffers(player);
+	        }
+    </script>
+	</head>
+	<body>
+		<div id="flashContent">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="500" height="800" id="MyGame" align="middle">
+				<param name="movie" value="MyGame.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<param name="play" value="true" />
+				<param name="loop" value="true" />
+				<param name="wmode" value="window" />
+				<param name="scale" value="showall" />
+				<param name="menu" value="true" />
+				<param name="devicefont" value="false" />
+				<param name="salign" value="" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="MyGame.swf" width="900" height="670">
+					<param name="movie" value="MyGame.swf" />
+					<param name="quality" value="high" />
+					<param name="bgcolor" value="#ffffff" />
+					<param name="play" value="true" />
+					<param name="loop" value="true" />
+					<param name="wmode" value="window" />
+					<param name="scale" value="showall" />
+					<param name="menu" value="true" />
+					<param name="devicefont" value="false" />
+					<param name="salign" value="" />
+					<param name="allowScriptAccess" value="sameDomain" />
+				<!--<![endif]-->
+					<a href="http://www.adobe.com/go/getflash">
+						<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+					</a>
+				<!--[if !IE]>-->
+				</object>
+				<!--<![endif]-->
+			</object>
+		</div>
+	</body>
+</html>
